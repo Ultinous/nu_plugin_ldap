@@ -39,11 +39,14 @@ impl PluginCommand for Table {
     fn signature(&self) -> nu_protocol::Signature {
         Signature::build(PluginCommand::name(self))
             .input_output_types(vec![(
-                Type::List(Box::new(Type::Record(Box::new([
-                    (String::from("dn"), Type::String),
-                    (String::from("attrs"), Type::record()),
-                    (String::from("bin_attrs"), Type::record()),
-                ])))),
+                Type::List(Box::new(Type::Record(
+                    [
+                        ("dn", Type::String),
+                        ("attrs", Type::record()),
+                        ("bin_attrs", Type::record()),
+                    ]
+                    .into(),
+                ))),
                 Type::list(Type::record()),
             )])
             .rest(

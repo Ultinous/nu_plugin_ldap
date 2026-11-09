@@ -31,11 +31,14 @@ impl PluginCommand for Search {
         Signature::build(PluginCommand::name(self))
             .input_output_types(vec![(
                 Type::Nothing,
-                Type::List(Box::new(Type::Record(Box::new([
-                    (String::from("dn"), Type::String),
-                    (String::from("attrs"), Type::record()),
-                    (String::from("bin_attrs"), Type::record()),
-                ])))),
+                Type::List(Box::new(Type::Record(
+                    [
+                        ("dn", Type::String),
+                        ("attrs", Type::record()),
+                        ("bin_attrs", Type::record()),
+                    ]
+                    .into(),
+                ))),
             )])
             .named("uri", SyntaxShape::String, "URI of LDAP server", None)
             .named(
